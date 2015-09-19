@@ -20,6 +20,7 @@ public class LoginController {
 
 	@Autowired
 	private AdminManager adminManager;
+	//非常开心
 
 	@RequestMapping(value = "/isExist")
 	// , method = RequestMethod.POST
