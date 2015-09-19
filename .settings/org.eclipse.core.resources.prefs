@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/com/hengtiansoft/jia/controller/HelloController.java=UTF-8
+encoding//src/com/hengtiansoft/jia/controller/LoginController.java=UTF-8
+encoding//src/com/hengtiansoft/jia/dao/StudentDaoImpl.java=UTF-8
+encoding//src/com/hengtiansoft/jia/interceptors/PermissionInterceptor.java=UTF-8
+encoding//src/com/hengtiansoft/jia/service/AdminManagerImpl.java=UTF-8
+encoding//src/com/hengtiansoft/jia/service/StudentManagerImpl.java=UTF-8

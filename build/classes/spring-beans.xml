@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+<context:annotation-config/>  
+
+<context:component-scan base-package="com.hengtiansoft.jia.service" />
+
+<!--
+<bean id="studentDao" class="com.hengtiansoft.jia.dao.StudentDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+</bean>  
+
+<bean id="studentManagerBase" class="com.hengtiansoft.jia.service.StudentManagerImpl">  
+    <property name="studentDao" ref="studentDao"></property>  
+</bean>  
+
+ 此处为代理
+<bean id="studentManager"  name="studentManager" class="com.hengtiansoft.jia.service.StudentManager">  
+    <property name="target" ref="studentManagerBase"></property>  
+</bean>        -->
+
+
+<!-- <bean id="adminDao" class="com.hengtiansoft.jia.dao.AdminDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+</bean>  
+
+<bean id="adminManagerBase" class="com.hengtiansoft.jia.service.AdminManagerImpl">  
+    <property name="adminDao" ref="adminDao"></property>  
+</bean>  
+
+
+<bean name="adminManager" parent="transactionProxy">  
+    <property name="target" ref="adminManagerBase"></property>  
+</bean>  -->
+</beans>

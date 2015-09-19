@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+ 
+  <display-name>SpringMVC</display-name>
+  
+ 
+  
+  <!-- 使用ContextLoaderListener配置时，需要告诉它Spring配置文件的位置 --> 
+  <!-- 如果没有指定，上下文载入器会在/WEB-INF/applicationContext.xml中找Spring配置文件 --> 
+  <!-- 我们可以通过在Servlet上下文中设置contextConfigLocation参数，来为上下文载入器指定一个或多个Spring配置文件 --> 
+  <!-- 注意：contextConfigLocation参数是一个用逗号分隔的路径列表，其路径是相对于Web系统的根路径的 --> 
+
+  <!-- 配置上下文载入器 --> 
+  <!-- 上下文载入器载入除DispatcherServlet载入的配置文件之外的其它上下文配置文件 --> 
+  <!-- 最常用的上下文载入器是一个Servlet监听器，其名称为ContextLoaderListener --> 
+
+<!-- 加载所有的配置文件 -->
+<context-param>
+   <param-name>contextConfigLocation</param-name><!-- contextConfigLocation：表示用于加载Bean的配置文件； -->
+   <param-value>classpath:spring-mvc.xml,classpath:spring-hibernate.xml,classpath:spring-beans.xml</param-value> 
+   <!--上面一句代码可以使用如下方式： <param-value>classpath*:spring-*.xml</param-value>  --> 
+</context-param>
+<!-- 配置Spring监听 -->
+<listener> 
+   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+</listener>  
+
+    <!-- SpringMVC的前端控制器 --> 
+    <!-- 当DispatcherServlet载入后，它将从一个XML文件中载入Spring的应用上下文，该XML文件的名字取决于<servlet-name> --> 
+    <!-- 这里DispatcherServlet将试图从一个叫做springmvc-servlet.xml的文件中载入应用上下文，其默认位于WEB-INF目录下 --> 
+    <!-- 所以ContextLoaderListener参数值也可写成<param-value>classpath:applicationContext-*.xml</param-value> -->
+<!-- <context-param>
+  <param-name>contextClass</param-name>
+  <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+ </context-param> -->
+ 
+ 
+<!-- 处理静态文件 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+ 
+<!-- 配置SpringMVC -->
+<!--配置前端控制器DispatcherServlet-->
+<servlet>
+    <servlet-name>spring</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    
+      <init-param>  
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>classpath:spring-mvc.xml</param-value>
+      </init-param>   
+      <load-on-startup>1</load-on-startup>    
+</servlet>
+<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern>
+</servlet-mapping>
+
+   
+    
+    
+    
+    
+   <welcome-file-list>   
+    <welcome-file>login.jsp</welcome-file>    
+  </welcome-file-list>
+  
+  <!-- 配置字符集 -->
+<filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+        <param-name>forceEncoding</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/</url-pattern>
+</filter-mapping>
+
+
+ <!-- ********************************************************************************************
+  hibernate配置
+********************************************************************************************  -->
+<!-- 配置Session -->
+
+  <filter>  
+        <filter-name>openSession</filter-name>  
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>  
+     <init-param> 
+         <param-name>sessionFactoryBeanName</param-name> 
+         <param-value>sessionFactory</param-value> 
+     </init-param> 
+     <init-param> 
+         <param-name>singleSession</param-name> 
+            <param-value>true</param-value>            
+     </init-param> 
+     <init-param> 
+        <param-name> flushMode </param-name> 
+        <param-value>AUTO </param-value>         
+     </init-param>         
+  </filter>  
+      
+  <filter-mapping>  
+    <filter-name>openSession</filter-name>  
+    <url-pattern>/*</url-pattern>  
+  </filter-mapping>
+</web-app> 
+
